@@ -1,0 +1,35 @@
+<%- include('../header') %> 
+
+<section class=" gradient-custom " style="border-radius: 1rem; background-color:white ;" >
+    <div class="container-fluid py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100 ">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5 ">
+          <div class="card  text-dark border-dark" style="border-radius: 1rem; background-color:white ;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mb-md-5 mt-md-4 p-5 border border-dark rounded-3">
+  
+                <img src="/public/assets/admin logo.png" alt="" style="width: 140px;height: 50px;">
+                <p class="text-white-50 mb-5 mt-4"> check your email for OTP</p>
+                <% if(typeof message!='undefined') {%>
+                  <p class="text-danger"><%= message %></p>
+                  <% } %>
+                <div class="form-outline form-white mb-4">
+                  <form action="/userLogin" method="post">
+                    <input type="text" id="typeEmailX" class="form-control form-control-lg border-dark" placeholder="enter OTP" name="otp" />
+                    <div class="mt-4">
+                      <button class="btn btn-outline-dark btn-lg px-5 mt-3" type="submit"  >Submit</button>
+                    </div>
+                  </form>
+                </div>
+                <form action="/resendOtp">
+                   <p>Didn't get the OTP ? click for </p><span><button class="btn btn-outline-dark" type="submit">Resend</button></span>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../footer') %>

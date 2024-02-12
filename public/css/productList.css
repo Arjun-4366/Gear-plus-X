@@ -1,0 +1,13 @@
+@media (max-width:576px){
+    .custom-panel{
+        width: 100px;
+    }
+    .custom-table{
+        width: 200px;
+    }
+    .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+}

@@ -1,0 +1,96 @@
+<%- include('../header') %>
+<%- include('./navbar') %>
+
+  <style>
+    .profile-image {
+      width: 48px;
+      height: 38px;
+    }
+
+    .back-button:hover {
+      color: red;
+    }
+    body{ 
+      background-color: #ffffff;
+          ;
+
+;
+    }
+  </style>
+ 
+  
+ <section style="margin-top: 150px;height:100vh;">
+   <!-- if wishlist has  products -->
+    <% if(wishlistProducts.length>0){ %>
+     
+      <% wishlistProducts.forEach(product=>{ %>
+       
+        <div class="container" >
+         
+          <div class="row d-flex justify-content-center align-items-center">
+           
+            <div class="col-10" >
+              <div class="card rounded-3  border-info"  style="background-color: #f9fcff;
+                background-image: linear-gradient(147deg, #fefefe 0%, #f0ecec 74%);">
+                <div class="card-body p-4">
+                  <div class="row d-flex justify-content-around align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <a href="/productInformation?id=<%= product._id %>"><img src="<%= product.image[0] %>"
+                          class="img-fluid rounded-3"></a>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <p class="lead fw-normal mb-2 text-primary">
+                        <%= product.name %>
+                      </p>
+                      <p class="text-danger">
+                        <%= product.brand %>
+                      </p>
+                    </div>
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      <h5 class="mb-0 text-success">₹<%= product.price %>
+                      </h5>
+                    </div>
+
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      <% if(product.quantity>0) {%>
+                        <h5 class="p-2 text-white bg-success rounded-3 d-flex justify-content-center">In stock</h5>
+                        <%}else{ %>
+                          <h5 class="p-2 text-white rounded-3 bg-danger d-flex justify-content-center">out of stock</h5>
+                          <% } %>
+
+                    </div>
+
+                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+
+                      <a href="/deleteWishlist?id=<%= product._id %>" class="text-danger btn"><i
+                          class="fas fa-trash fa-lg"></i></a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>  
+        </div>
+      
+
+        <%}) %>
+      <!-- if no products -->
+          <% }else{ %>
+        
+            <div class="d-flex align-items-center justify-content-center flex-column  bg-white">
+              <img src="/public/assets/wishlist empty.png" alt="" style="width: 60%;">
+              <h4 class="text-danger">Your wishlist is empty!!</h4>
+              <a href="/userHome" class="btn btn-success mt-5">Save items</a>
+            </div>
+         
+          
+            <% } %>
+       
+          </section>  
+
+
+          <%- include('../footer') %>

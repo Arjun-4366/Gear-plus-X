@@ -1,0 +1,65 @@
+<%- include('../header') %>
+  <%- include('./navbar',{userId,image,cart}) %>
+
+    <div class="row  d-flex  justify-content-center" style="margin-top: 150px;">
+
+      <div class="col-md-8 col-lg-8 justify-content-center">
+        <div class="card card-custom pb-4" style="background-color: #6b6a67;">
+          <div class="card-body mt-4 mx-5" style="background-color: #6b6a67;">
+            <div class="text-center mb-3 pb-2 mt-3">
+              <h4 style="color: #21201f ;">Delivery Details</h4>
+            </div>
+            <!-- Address Details Section -->
+            <form class="mb-0" action="/registerAddress" method="post">
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form9Example1" class="form-control input-custom" name="firstName" required />
+                    <label class="form-label" for="form9Example1">Name</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form9Example2" class="form-control input-custom" name="mobile" required />
+                    <label class="form-label" for="form9Example2">Mobile</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form9Example3" class="form-control input-custom" name="city" required />
+                    <label class="form-label" for="form9Example3">City</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form9Example4" class="form-control input-custom" name="pin" required />
+                    <label class="form-label" for="form9Example4">Pin</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="text" id="form9Example6" class="form-control input-custom" name="address" required />
+                    <label class="form-label" for="form9Example6">Address</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="email" id="typeEmail" class="form-control input-custom" name="email" required />
+                    <label class="form-label" for="typeEmail">Email</label>
+                  </div>
+                </div>
+              </div>
+              <div class="float-end ">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-rounded"
+                  style="background-color: #0062CC ;">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

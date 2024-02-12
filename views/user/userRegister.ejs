@@ -1,0 +1,76 @@
+<%- include('../header') %>
+
+
+  <section class=" gradient-custom " style="background-color:white;margin-top: 150px;">
+
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card  text-dark border-dark " style="background-color:white ;">
+              <div class="card-body p-5 border-light rounded-3">
+                <h4 class="text-uppercase text-center mb-5">Create an account</h4>
+                <% if(typeof message != 'undefined') {%>
+                   <p class="text-danger"><%= message %></p>
+                  <% } %>
+                  <!-- User Details -->
+                <form action="/registerData" method="post" enctype="multipart/form-data">
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg border-secondary" name="name" required/>
+                    <label class="form-label" for="form3Example1cg" >Your Name</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="email" id="form3Example3cg" class="form-control form-control-lg border-secondary" name="email" required/>
+                    <label class="form-label" for="form3Example3cg">Your Email</label>
+                  </div>
+
+
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example4cg" class="form-control form-control-lg border-secondary" name="mobile" required/>
+                    <label class="form-label" for="form3Example4cg" 
+                  >Mobile Number</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password" class="form-control form-control-lg border-secondary" name="password" required/>
+                    <label class="form-label" for="form3Example4cg">Password</label>
+                  </div>
+
+
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="confirmPassword" class="form-control form-control-lg border-secondary" name="confirmPassword"/>
+                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="file" id="form3Example4cdg" class="form-control form-control-lg text-danger border-secondary" name="image" />
+                    <label class="form-label " for="form3Example4cdg">Image</label>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit"
+                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  </div>
+                </form>
+      
+                <div class="d-flex flex-column mt-3">
+                  <p class="text-center">Sign In With Google</p>
+                  <div class="d-flex justify-content-center text-center pt-1">
+                    <a href="/auth/google" class="text-white google"><img src="/public/assets/google-logo.jpg" alt="" style="width: 25px;height: 25px;" class=""></a>
+                  </div>
+                </div>
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/userLogin"
+                  class="fw-bold text-body"><u class="text-primary">Login here</u></a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <%- include('../footer') %>

@@ -1,0 +1,47 @@
+<%- include('../header') %>
+    <%- include('./adminNavbar') %>
+
+
+
+        <div class=" d-flex">
+            <%- include('./adminpanel') %>
+
+                <div class="col-lg-8 col-md-8 container-fluid p-5 d-flex flex-column "
+                    style="background-color: #ffffff; color: white;margin-top: 100px;">
+                    <div class="mt-5 d-flex flex-column ">
+
+
+                        <form action="/createCoupon" method="post">
+
+                            <!-- coupon Name -->
+                            <div class="form-group d-flex align-items-center flex-column custom-form mb-3">
+                                <div class="col-md-6 ">
+                                    <input id="product_name" placeholder="COUPON NAME"
+                                        class="form-control input-md mb-3 custom-form border border-dark" required=""
+                                        type="text" name="name">
+                                </div>
+                            </div>
+
+                            <!-- coupon Discount -->
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <div class="col-md-6">
+                                    <input id="product_name" placeholder="DISCOUNT"
+                                        class=" form-control input-md mb-3 custom-form border border-dark" required=""
+                                        type="number" name="discount">
+
+                                </div>
+                            </div>
+
+                            <!-- submit Button -->
+                            <div class=" d-flex justify-content-center">
+                                <button id="singlebutton" class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+
+
+
+        <%- include('../footer') %>

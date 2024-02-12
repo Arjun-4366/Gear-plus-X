@@ -1,0 +1,4 @@
+.nav-pills li :hover{
+    background-color: rgb(119, 119, 119);
+    color: white;
+}

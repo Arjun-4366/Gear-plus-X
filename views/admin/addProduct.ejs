@@ -1,0 +1,136 @@
+<%- include('../header') %>
+    <%- include('./adminNavbar') %>
+
+
+        <div class=" d-flex">
+
+            <!-- Admin Panel  -->
+
+            <%- include('./adminpanel') %>
+
+                <!-- Product Add Section -->
+                <div class="col-lg-8 col-md-8 container-fluid mb-5"
+                    style="background-color: #ffffff; color: white;margin-top: 75px;">
+                    <div class="mt-5">
+                        <!-- PRODUCT NAME -->
+                        <form action="/addProduct" method="post" enctype="multipart/form-data" class="text-dark">
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="product_name"
+                                    style="font-size: 15px;">PRODUCT NAME</label>
+                                <div class="col-md-6">
+                                    <input id="product_name" placeholder="PRODUCT NAME"
+                                        class="border border-dark form-control input-md mb-3 custom-form " required=""
+                                        type="text" name="name">
+                                </div>
+                            </div>
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label" for="product_name" style="font-size: 15px;">BRAND
+                                    NAME</label>
+                                <div class="col-md-6">
+                                    <input id="product_name" placeholder="BRAND NAME"
+                                        class="border border-dark form-control input-md mb-3 custom-form" required=""
+                                        type="text" name="brand">
+
+                                </div>
+                            </div>
+
+                            <!--PRODUCT CATEGORY -->
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="product_categorie"
+                                    style="font-size: 15px;">PRODUCT CATEGORY</label>
+                                <div class="col-md-6">
+                                    <select id="product_categorie"
+                                        class="border border-dark form-control mb-3 custom-form border border-dark"
+                                        name="category">
+                                        <option selected>select your choice here</option>
+                                        <option value="football">football</option>
+                                        <option value="Cricket">Cricket</option>
+                                        <option value="Cricket">Athelete</option>
+                                        <option value="Cricket">Badminton</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- AVAILABLE QUANTITY-->
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="available_quantity"
+                                    style="font-size: 15px;">AVAILABLE QUANTITY</label>
+                                <div class="col-md-6">
+                                    <input id="available_quantity"
+                                        class="border border-dark form-control input-md mb-3 custom-form" required=""
+                                        type="text" name="quantity" placeholder="Add quantity">
+
+                                </div>
+                            </div>
+
+                            <!-- PRICE -->
+
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="available_quantity"
+                                    style="font-size: 15px;">PRICE</label>
+                                <div class="col-md-6">
+                                    <input id="available_quantity" placeholder="price"
+                                        class="border border-dark form-control input-md mb-3 custom-form" required=""
+                                        type="text" name="price">
+                                </div>
+                            </div>
+
+                            <!-- provide short description here -->
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="product_description"
+                                    style="font-size: 15px;">PRODUCT DESCRIPTION</label>
+                                <div class="col-md-6 custom-form">
+                                    <textarea class="border border-dark form-control mb-3" id="product_description"
+                                        name="discription" placeholder="provide a short description here"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="product_description"
+                                    style="font-size: 15px;">PRODUCT DETAILS</label>
+                                <div class="col-md-6 custom-form">
+                                    <textarea class="border border-dark form-control mb-3" id="product_description"
+                                        name="details" placeholder="provide product details here "></textarea>
+                                </div>
+                                <div class="col-md-6 custom-form">
+                                    <textarea class="border border-dark form-control mb-3" id="product_description"
+                                        name="details" placeholder="provide product details here "></textarea>
+                                </div>
+                                <div class="col-md-6 custom-form">
+                                    <textarea class="border border-dark form-control mb-3" id="product_description"
+                                        name="details" placeholder="provide product details here "></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Discount -->
+                            <div class="form-group d-flex align-items-center flex-column custom-form">
+                                <label class="col-md-4 control-label " for="available_quantity"
+                                    style="font-size: 15px;">DISCOUNT</label>
+                                <div class="col-md-6">
+                                    <input id="available_quantity" placeholder="add 0 if there is no discount"
+                                        class="border border-dark form-control input-md mb-3 custom-form" required=""
+                                        type="text" name="discount">
+                                </div>
+                            </div>
+                            <!-- IMAGE-->
+
+                            <div class="form-group d-flex align-items-center flex-column mb-2">
+                                <label class="col-md-4 control-label d-flex mb-2" for="filebutton"
+                                    style="font-size: 15px;">Image</label>
+                                <div class="col-md-4">
+                                    <input id="filebutton" class="input-file custom-form" type="file" name="image"
+                                        multiple>
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="form-group d-flex align-items-center flex-column ">
+                                <div class="col-md-4">
+                                    <button id="singlebutton" class="btn btn-dark" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+      

@@ -1,0 +1,55 @@
+<%- include('../header') %>
+    <%- include('./adminNavbar') %>
+        <div class=" d-flex">
+            <%- include('./adminpanel') %>
+                <div class="container col-lg-8  max-vh-100 max-vw-100  table-responsive "
+                    style="overflow: auto;margin-top: 150px;">
+                    <table class="table align-right mb-0 bg-white custom-table ">
+                        <thead class="ms-4">
+                            <tr aria-colspan="2">
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Verification</th>
+                                <div>
+                                    <th colspan="3"></th>
+                                </div>
+
+
+                            </tr>
+                        </thead>
+                        <% if(user.length>0) { %>
+                            <% for(let i=0;i<user.length;i++){ %>
+                                <tr>
+                                    <td>
+                                        <%= user[i].name %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].email %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].isVerified %>
+                                    </td>
+                                    <td><button type="submit" class="btn btn-danger"><a
+                                                href="/userDelete?id=<%= user[i]._id %>"
+                                                class="text-light text-decoration-none">Delete</a></button></td>
+                                    <td><button type="submit" class="btn btn-secondary"><a
+                                                href="/userBlocked?id=<%= user[i]._id %>"
+                                                class="text-light text-decoration-none">
+                                                <%= (user[i].isBlocked) ? 'Unblock' : 'Block' %>
+                                            </a></button></td>
+                                    <td><button type="submit" class="btn btn-success"><a
+                                                href="/userOrders?id=<%= user[i]._id %>"
+                                                class="text-light text-decoration-none"> order Details</a></button></td>
+                                </tr>
+                                <%} %>
+                                    <%}else{%>
+                                        <tr>
+                                            <td colspan="2">Users not Found</td>
+                                        </tr>
+                                        <%} %>
+                    </table>
+
+                </div>
+        </div>
+
+        <%- include('../footer') %>

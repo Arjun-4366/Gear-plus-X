@@ -1,0 +1,307 @@
+<%- include('../header') %>
+  <%- include('./navbar',{userId,cart,image}) %>
+    <section class="h-100 gradient-custom " style="margin-top: 100px;">
+      <!--  if there is no cart items -->
+      <% if(typeof message!='undefined' ){%>
+        <div class="d-flex align-items-center justify-content-center flex-column  bg-white">
+          <img src="/public/assets/empty cart .png" alt="" style="width: 100%;">
+
+          <h4 class="mt-2 text-danger">No items in the cart!!</h4>
+          <a href="/userHome" class="btn btn-success mt-5">Shop Now</a>
+        </div>
+        <!-- if cart items -->
+        <% } else{%>
+
+    </section>
+
+    <section class="h-100 gradient-custom " style="margin-top: 100px;">
+
+      <div class="container py-5">
+        <div class="row d-flex justify-content-center my-4">
+          <div class="col-md-8">
+
+            <!-- single cart item -->
+
+            <div class="card mb-4 border-primary ">
+              <div class="card-header py-3">
+              </div>
+              <!-- looping over cart items -->
+              <% cart.items.forEach(item=>{ %>
+                <% if(item.product.quantity>0){%>
+                  <div class="card-body">
+                    <div class="row ">
+                      <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                        <!-- Image -->
+                        <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                          <a href="/productInformation?id=<%= item.product._id %>"><img
+                              src="<%= item.product.image[0] %>" class="w-100" alt="Blue Jeans Jacket" /></a>
+                          <p class="d-flex align-items-center justify-content-center">Base Price: ₹<strong
+                              class="ms-1 basePrice-<%= item._id %>">
+                              <%= item.product.discountedPrice %>
+                            </strong></p>
+                          <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                          </a>
+                        </div>
+                        <!-- Image -->
+                      </div>
+
+                     <!-- Product Details -->
+                      <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                        <p><strong>
+                            <%= item.product.name %>
+                          </strong></p>
+                        <p>
+                          <%= item.product.category %>
+                        </p>
+                        <a href="/deleteCartItem?id=<%= item.product._id %>" class="btn btn-danger btn-sm me-1 mb-2"
+                          data-mdb-toggle="tooltip" title="Remove item">
+                          <i class="fas fa-trash "></i>
+                        </a>
+                      </div>
+
+
+
+                      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <!-- Quantity -->
+                        <div class=" mb-4 rounded-3 p-2" style="background-color: rgb(45, 16, 104);width: 170px;">
+
+                          <div class="form-outline d-flex align-items-center parent">
+
+                            <button class="btn  minus" onclick="updateQuantity('<%= item._id %>', -1)"
+                              style="background-color: rgb(6, 104, 134);"><i
+                                class="fa-solid fa-minus  text-white"></i></button>
+                            <p class="form-label  text-light ms-2 " for="form1">Qty: <strong
+                                class="text-success quantity-<%= item._id %>">
+                                <% if(typeof newQuantityUpdated!='undefined' ){%>
+                                  <%= newQuantityUpdated %>
+                                    <% } else{%>
+                                      <%= item.quantity %>
+                                        <% }%>
+                              </strong></p> <button class="btn btn-secondary ms-2  plus"
+                              onclick="updateQuantity('<%= item._id %>', 1)"
+                              style="background-color: rgb(6, 104, 134);"><i
+                                class="fa-solid fa-plus text-white"></i></button>
+                          </div>
+
+
+                          <!-- Price -->
+                          <p class="price text-start  text-light">Total:
+                            <strong class="text-danger total-<%= item._id %> totalPrices">
+                              <% if(typeof newTotalUpdated!='undefined' ){%>
+                                <%= newTotalUpdated %>
+                                  <% } else{%>
+                                    <%= item.product.discountedPrice %>
+                                      <% }%>
+                            </strong>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <% }else{%>
+
+                      <div class="row single-item">
+                        <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                          <!-- Image -->
+                          <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                            <a href="/productInformation?id=<%= item.product._id %>"><img
+                                src="<%= item.product.image[0] %>" class="w-100" style="filter: blur(1px);"
+                                alt="Blue Jeans Jacket" /></a>
+                            <p class="d-flex align-items-center justify-content-center" style="filter: blur(1px);">Base
+                              Price: ₹<strong class="ms-1 basePrice-<%= item._id %>">
+                                <%= item.basePrice %>
+                              </strong></p>
+                            <a href="#!">
+                              <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                            </a>
+                          </div>
+                          <!-- Image -->
+                        </div>
+
+
+                        <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                          <!-- Data -->
+                          <p style="filter: blur(1px);"><strong>
+                              <%= item.product.name %>
+                            </strong></p>
+
+                          <p style="filter: blur(1px);">
+                            <%= item.product.category %>
+                          </p>
+                          <div class="d-flex">
+                            <a href="/deleteCartItem?id=<%= item.product._id %>" class="btn btn-danger btn-sm me-1 mb-2"
+                              data-mdb-toggle="tooltip" title="Remove item">
+                              <i class="fas fa-trash "></i>
+                            </a>
+                            <h4 class="cart-msg text-danger d-flex align-items-center justify-content-center ms-4">Out
+                              of stock</h4>
+                          </div>
+                          <p class="text-danger mt-3">*Remove this product for checkout</p>
+                          <!-- Data -->
+                        </div>
+
+                      </div>
+                      <% }%>
+
+                        <!-- Single item -->
+
+                        <script>
+                          //  script for cart page logic 
+                          async function updateQuantity(itemId, change) {
+                            var quantityElement = document.querySelector('.quantity-' + itemId);
+                            var basePrice = document.querySelector('.basePrice-' + itemId);
+                            var totalElement = document.querySelector('.total-' + itemId);
+                            var totalAmountField = document.getElementById('totalAmount')
+                            var totalPrice = document.getElementById('productPrice')
+                            var existingTotal = totalAmountField.innerText
+
+                            var currentQuantity = parseInt(quantityElement.innerText);
+                            var basePrice = parseInt(basePrice.innerText)
+
+                            var newQuantity = currentQuantity + change;
+                            if (newQuantity >= 0) {
+                              quantityElement.innerText = newQuantity;
+                              var newTotal = newQuantity * basePrice;
+                              totalElement.innerText = newTotal;
+                              totalAmountField.innerText = parseInt(totalElement.innerText)
+                            }
+
+                            var deliveryFee = 40
+                            var allTotalElements = document.querySelectorAll('.totalPrices')
+                            var sumOfPrices = Array.from(allTotalElements).reduce((sum, price) => sum + parseFloat(price.innerText), 0)
+                            console.log(sumOfPrices)
+                            totalAmountField.innerText = sumOfPrices + deliveryFee
+                            totalPrice.innerText = sumOfPrices
+
+                            const url = '/discounts';
+                            const data = {
+                              itemId: itemId,
+                              newQuantity: newQuantity,
+                              newTotal: newTotal,
+                              sumOfPrices: sumOfPrices
+                            }
+                            try {
+                              const response = await fetch(url, {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(data)
+                              })
+                              if (!response.ok) {
+                                throw new Error(`Error ${response.status}`)
+                              }
+                              const responseData = await response.json()
+                              console.log(responseData)
+
+                            }
+                            catch (error) {
+                              console.log('Error', error)
+                            }
+                          }
+
+                        </script>
+
+                        <hr class="my-4" />
+
+                  </div>
+
+                  <%}) %>
+                    <!-- end cart items loop -->
+            </div>
+
+            <!-- discount coupon section -->
+
+            <div class="card mb-4 mb-lg-0 mt-4 border-info">
+              <form action="/discounts" method="post">
+                <h5 class="text-success d-flex align-items-center justify-content-center mt-3">Add coupons for
+                  discounts</h5>
+                <div class="col d-flex align-items-center justify-content-center p-3">
+
+                  <input type="text" id="form9Example6" class="form-control input-custom w-50 border-success" required
+                    name="coupon" />
+                </div>
+                <p class="text-success d-flex align-items-center justify-content-center">
+                  <% if(typeof couponMessage!="undefined" ){ %>
+                    <%= couponMessage %>
+                      <% } %>
+                </p>
+                <div class="mb-3 d-flex align-items-center  justify-content-end me-3">
+                  <button class="btn btn-success " type="submit">Apply</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Summary of cartPage -->
+
+          <div class="card mb-4 mt-4 border-success">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Summary</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Products
+                  <span class="text-success " id="productPrice">₹<%= cart.totalPrice %></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Delivery Fee
+                  <span class="text-success">₹<%= cart.deliveryFee %></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Discounts
+                  <span class="text-success">
+                    <% if(typeof discountPrice!='undefined' ){%>
+                      <%= coupon.discount %>%
+                        <% } else{%>
+                          <%= 0 %>%
+                            <% }%>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount</strong>
+
+                  </div>
+
+                  <span><strong class="text-danger" id="totalAmount">
+                      <% if(typeof discountPrice !='undefined' ) {%>
+                        ₹<%= parseFloat(discountPrice) + parseFloat(cart.deliveryFee) %>
+                          <%} else { %>
+
+                            ₹<%= parseFloat(cart.totalPrice) + parseFloat(cart.deliveryFee)%>
+                              <% }%>
+                    </strong></span>
+
+                </li>
+              </ul>
+
+
+              <% let isCheckoutEnabled=true; %>
+
+                <% cart.items.forEach(item=> { %>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <% if (item.product.quantity <=0) { %>
+                      <% isCheckoutEnabled=false; %>
+                        <% } %>
+                  </div>
+                  <% }); %>
+
+                    <% if (isCheckoutEnabled) { %>
+                      <div class="d-flex align-items-center justify-content-center">
+                        <a type="submit" class="btn btn-success btn-lg btn-block" href="/choosePayment">
+                          Go to checkout
+                        </a>
+                      </div>
+                      <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <% } %>
+
+
+      <%- include('../footer') %>

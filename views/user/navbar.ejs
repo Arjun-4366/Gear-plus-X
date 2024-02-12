@@ -1,0 +1,78 @@
+
+<nav class="navbar navbar-expand-lg navbar-expand-md fixed-top navbar-dark shadow p-3  bg-white rounded mb-2" style="background-color: #fffdfd ;">
+    <div class="container-fluid d-flex align-items-center justify-content-around">
+        <a class="navbar-brand" href="<%= userId ? '/userHome' : '/' %>"><img src="/public/assets/new-logo.png" alt="" style="width: 140px;height: 50px;"></a>
+        <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span ><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse  " id="navbarNav">
+            <form  action="/searchProducts" method="post">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <label for="searchInput" class="visually-hidden">Search</label>
+                       
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search"
+                                aria-label="Search" name="search">
+                            <button  class="btn btn-outline-light bg-dark text-dark" type="submit">
+                                <i class="fa-solid fa-magnifying-glass text-light" ></i>
+                               
+                            </button>
+                        </div>
+                   
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav ms-5 me-5 col-md-6 d-flex " >
+                <li class="nav-item ms-3 ">
+                    <a class="nav-link text-dark" style="position: relative;" href=<%=userId ? "/myOrders" :"/userLogin"%>>My Orders</a>
+                </li>
+                <div class="dropdown">
+                    <span class="  text-dark nav-link ms-3" type="button" id="userDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false" >Sort</span>
+                        <ul class="dropdown-menu fade" aria-labelledby="userDropdown" style="background-color: aquamarine;">
+                           
+        
+                                <li><a class="dropdown-item" href="/sortAscend">Price:Low to High</a></li>
+                                <li><a class="dropdown-item" href="/sortDescend">Price:High to Low</a></li>
+                                
+                               
+                        </ul>
+                    </div>
+                <li class="nav-item ms-3 ">
+                    <a class="nav-link text-dark" style="position: relative;" href=<%=userId ? "/wishlist" :"/userLogin"%>>Wishlist</a>
+                </li>
+               
+            </ul>
+          
+            <div class="d-flex align-items-center mt-2  ">
+            <a href="<%= userId ? '/cartPage' : '/userLogin' %>" ><i class="fa-solid fa-cart-shopping text-dark fs-4 " style="position: relative;"><span class="text-danger ms-2" style="font-size: 12px;position: absolute;"><%= userId ? cart.items.length :0 %></span></i></a>
+            <div class="dropdown">
+                <span class=" ms-5 " type="button" id="userDropdown" data-bs-toggle="dropdown" 
+                    aria-expanded="false" style="width: 48px;height: 38px;">
+                    <% if (image) { %>
+                        <img src="<%= image %>" alt="" class="rounded-circle profile-image">
+                      <% } else { %>
+                        <i class="fa-solid fa-user text-dark fs-5  mt-2"></i>
+                      <% } %>
+                   
+                </span>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: rgb(92, 131, 210);">
+                    <% if (typeof user !=='undefined' ) { %>
+
+                        <li><a class="dropdown-item" href="/userLogout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/myProfile?id=<%= userId %>">My Profile</a></li>
+                        <% } else { %>
+
+                            <li><a class="dropdown-item" href="/userLogin">Login</a></li>
+                            <% } %>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    
+</nav>
+

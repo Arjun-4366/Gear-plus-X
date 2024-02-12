@@ -1,0 +1,76 @@
+<%- include('../header') %>
+  <%- include('./navbar',{userId,image,cart}) %>
+    <style>
+      body {
+        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+      }
+    </style>
+
+
+    <!-- UPDATE PROFILE SECTION STARTS -->
+    <section class=" gradient-custom  " style="background-color: #f9fcff;
+  background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);;margin-top: 150px ; ">
+
+
+
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="mask d-flex align-items-center h-10 gradient-custom-3">
+          <div class="container h-100   ">
+            <div class="row d-flex justify-content-center mt-3 align-items-center h-100">
+              <div class="">
+                <div class="card  text-white border-dark " style="background-color:#fefafa ;">
+                  <div class="card-body p-5 border-light rounded-3">
+                    <h2 class="text text-center text-dark  mb-1" style="color: #e6e6eb;">Edit your profile here</h2>
+                    <% if ( user) { %>
+                      <form action="/updateProfile?id=<%= user._id %>" method="POST" enctype="multipart/form-data">
+                        <div class="d-flex align-items-center justify-content-center" style="width: 89%;height: 120px;">
+                          <img src="<%= user.image %>" class="rounded-circle  " alt="" style="width: 28%;height: 86px;">
+                        </div>
+
+
+
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form3Example1cg" class="form-control form-control-lg border-dark"
+                            name="name" required value="<%= user.name %>" />
+                          <label class="form-label" for="form3Example1cg">Your Name</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="email" id="form3Example3cg" class="form-control form-control-lg  border-dark"
+                            name="email" value="<%= user.email %>" required />
+                          <label class="form-label" for="form3Example3cg">Your Email</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form3Example4cg" class="form-control form-control-lg  border-dark"
+                            name="mobile" value="<%= user.mobile %>" required />
+                          <label class="form-label" for="form3Example4cg">Mobile Number</label>
+                        </div>
+
+                        <div class="form-outline mb-4 d-flex flex-column align-items-center">
+
+                          <input type="file" id="form3Example4cdg"
+                            class="form-control form-control-lg text-danger w-75  border-dark  " name="image" />
+                          <label class="form-label" for="form3Example4cdg">Profile Image</label>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                          <button type="submit"
+                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Update</button>
+                        </div>
+                      </form>
+                      <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- UPDATE PROFILE SECTION STARTS ENDS -->
+
+
+
+
+    <%- include('../footer') %>

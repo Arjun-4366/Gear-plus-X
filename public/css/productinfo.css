@@ -1,0 +1,17 @@
+
+.thumb-img {
+    transition: 0.2s ease-out;
+}
+
+.thumb-img:hover {
+    transform: scale(1.1);
+
+}
+
+.main-image {
+    transition: 0.2s ease-in;
+}
+
+.main-image:hover {
+    transform: scale(1.3);
+}

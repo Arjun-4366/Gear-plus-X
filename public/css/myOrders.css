@@ -1,0 +1,65 @@
+.progress-bar {
+    border-radius: 16px;
+    background-color: #d51616;
+    transition: width 0.5s ease;
+  }
+
+  @keyframes placed {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: 5%;
+    }
+  }
+
+  @keyframes dispatch {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: 30%;
+    }
+  }
+
+  @keyframes outForDelivery {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: 70%;
+    }
+  }
+
+  @keyframes delivered {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+
+
+  .filling-placed {
+    animation: placed 2s ease;
+
+  }
+
+  .filling-dispatch {
+    animation: dispatch 2s ease;
+
+  }
+
+  .filling-ofd {
+    animation: outForDelivery 2s ease;
+
+  }
+
+  .filling-delivered {
+    animation: delivered 2s ease;
+  }

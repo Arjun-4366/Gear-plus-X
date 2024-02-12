@@ -1,0 +1,7 @@
+.profile-image {
+  width: 48px;
+  height: 38px;
+}
+.categories:hover {
+  background-color: lightgrey;
+}

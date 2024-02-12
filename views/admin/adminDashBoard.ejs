@@ -1,0 +1,69 @@
+<%- include('../header') %>
+
+  <%- include('./adminNavbar') %>
+    <div class=" d-flex container-fluid">
+      <!-- Admin panel -->
+      <div class="me-3">
+        <%- include('./adminpanel') %>
+      </div>
+      <!-- chart section -->
+      <div class="col-lg-8 col-md-8 container-fluid mb-5 d-flex align-items-center justify-content-center">
+
+        <section class="container-fluid col-8 ">
+          <div class="d-flex">
+            <!-- piechart -->
+            <div class=" d-flex  align-items-center justify-content-center ms-5">
+              <canvas id="myPieChart" data-pieData="<%= JSON.stringify(pieData) %>"></canvas>
+            </div>
+            <!-- Barchart -->
+            <div class=" col-10 d-flex  align-items-center justify-content-center ms-5">
+              <canvas id="myChartBar" data-barData="<%= JSON.stringify(barData) %>"></canvas>
+            </div>
+          </div>
+          <!-- total sale amount -->
+          <div class="row mt-5 " style="height: 50px;">
+            <div class="col-8  rounded-3 border border-dark shadow  d-flex align-items-center justify-content-center">
+              <span style="font-size: 20px;color:rgb(82, 67, 67);">Total Sale Amount</span></div>
+            <div
+              class="col-4 rounded-3  border border-dark shadow     d-flex align-items-center justify-content-center">
+              <span style="font-size: 20px;color:rgb(82, 67, 67);" class="counter">₹<%= totalSale %></span></div>
+          </div>
+        </section>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+          // for pie chart
+          document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('myPieChart');
+            const pieData = JSON.parse(ctx.getAttribute('data-pieData'))
+            new Chart(ctx, {
+              type: 'pie',
+              data: pieData,
+              options: {
+                scales: {
+                }
+              }
+            });
+          });
+          // for bar chart
+          document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('myChartBar');
+            const barData = JSON.parse(ctx.getAttribute('data-barData'))
+            new Chart(ctx, {
+              type: 'bar',
+              data: barData,
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          });
+        </script>
+
+      </div>
+
+    </div>

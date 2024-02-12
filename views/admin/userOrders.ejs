@@ -1,0 +1,95 @@
+<%- include('../header') %>
+
+  <%- include('./adminNavbar') %>
+
+    <div class=" d-flex">
+      <!-- Admin Panel -->
+      <%- include('./adminpanel') %>
+
+        <!-- if no orders -->
+        <% if( order===null){ %>
+          <div
+            class=" container d-flex align-items-center justify-content-center flex-column  bg-white col-lg-6 col-xl-6 col-md-6">
+            <h4 class="mt-2 text-danger">No Orders from User</h4>
+          </div>
+          <!-- if orders -->
+          <% }else{%>
+            <!-- order Details -->
+            <div class="d-flex flex-column" style="margin-top: 100px;">
+              <% order.userOrders.forEach((item)=>{ %>
+                <div class="">
+                  <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                      <p class="small text-dark mb-0">OrderId:<%= item._id %>
+                      </p>
+                      <p class="small text-success mb-0">Payment:<%= item.payment %>
+                      </p>
+                    </div>
+
+                    <div class="card shadow-0 border mb-4 ">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <img src="<%= item.productInfo.image[0] %>" class="img-fluid" alt="Phone">
+                          </div>
+                          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-primary mb-0">
+                              <%= item.productInfo.name %>
+                            </p>
+                          </div>
+                          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-danger mb-0 small">
+                              <%= item.productInfo.brand %>
+                            </p>
+                          </div>
+                          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-success mb-0 small">Placed at <br>
+                              <%= item.orderDate %>
+                            </p>
+                          </div>
+                          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-info mb-0 small">Qty: <%= item.quantity %>
+                            </p>
+                          </div>
+                          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-success mb-0 small">₹<%= item.price %>
+                            </p>
+                          </div>
+                          <div class="col-md-4 text-center d-flex justify-content-center align-items-center">
+                            <p class="text-success mb-0 small">Status : <%= item.status %>
+                            </p>
+                          </div>
+
+                        </div>
+                        <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+
+                        <!-- change order status -->
+                        <form action="/orderStatus?id=<%= userId %>&&itemId=<%= item._id %>" method="post">
+                          <div class="d-flex justify-content-between align-items-center p-2">
+                            <div class="d-flex flex-column">
+                              <label for="">Placed</label>
+                              <input type="radio" name="status" value="Placed" required>
+                            </div>
+                            <div class="d-flex flex-column">
+                              <label for="">Order Dispatched</label>
+                              <input type="radio" name="status" value="Dispatched" required>
+                            </div>
+                            <div class="d-flex flex-column">
+                              <label for="">Out for Delivery</label>
+                              <input type="radio" name="status" value="Out For Delivery" required>
+                            </div>
+                            <div class="d-flex flex-column">
+                              <label for="">Delivered</label>
+                              <input type="radio" name="status" value="Delivered" required>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } )%>
+                  <% }%>
+            </div>
+    </div>

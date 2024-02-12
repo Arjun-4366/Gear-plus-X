@@ -1,0 +1,42 @@
+<%- include('../header') %> 
+
+<section class=" gradient-custom " style="border-radius: 1rem; background-color:#ffffff ;" >
+    <div class="container-fluid py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card  text-dark shadow" style="border-radius: 1rem; background-color:#ffffff ;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mb-md-5 mt-md-4 p-5 border border-dark rounded-3 shadow">
+  
+                <a href="/adminHome"><img src="/public/assets/admin logo.png" alt="" style="width: 150px;height: 55px;"></a>
+                <p class="text-dark-50 mb-5 mt-4">Admin Login</p>
+                <% if( typeof message != 'undefined') {%>
+                  <p class="text-50 mb-5 mt-4"><%= message %></p>
+                  <%  }%>
+             <form action="/verifyLogin" method="post" >
+              <!-- Enter Email -->
+                <div class="form-outline form-dark mb-4">
+                  <input type="email" id="typeEmailX" class="border border-dark form-control form-control-lg" name="email" />
+                  <label class="text-dark form-label" for="typeEmailX">Email</label>
+                </div>
+                <!-- Enter Password -->
+                <div class="form-outline form-white mb-4">
+                  <input type="password" id="typePasswordX" class="border border-dark form-control form-control-lg" name="password" />
+                  <label class="text-dark form-label" for="typePasswordX">Password</label>
+                </div>
+                 <!-- forgot password -->
+                <p class="small mb-5 pb-lg-2"><a class="text-dark-50" href="#!">Forgot password?</a></p>
+                 <!-- submit button -->
+                <button class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<%- include('../footer') %>
+
