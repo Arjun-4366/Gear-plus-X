@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 4000
 const userRouter = require('./routes/userRouter')
 const adminRouter = require('./routes/adminRouter')
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/userDatabase')
+mongoose.connect(process.env.MONGO_URL)
 
 
 app.use('/public',express.static('public'))
