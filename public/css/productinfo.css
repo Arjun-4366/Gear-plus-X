@@ -1,6 +1,12 @@
+.thumbnail{
+    display: flex;
+     justify-content: center;
+}
+
 
 .thumb-img {
     transition: 0.2s ease-out;
+    
 }
 
 .thumb-img:hover {

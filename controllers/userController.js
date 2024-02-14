@@ -116,7 +116,7 @@ const sendEmail = (message, name, email) => {
     from: process.env.SMPT_MAIL,
     to: email,
     subject: "Your OTP for GearPlusX",
-    html: `hai ${name} this is your ${message}`,
+    html: `hai ${name} this is your login otp ${message}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
