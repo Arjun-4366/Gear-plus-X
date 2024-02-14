@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 require('dotenv').config()
-const PORT = process.env.PORT
+const PORT = 8080
 const userRouter = require('./routes/userRouter')
 const adminRouter = require('./routes/adminRouter')
 const mongoose = require('mongoose')
