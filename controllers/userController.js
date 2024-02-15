@@ -14,7 +14,7 @@ const pdf = require("html-pdf");
 const password = require('generate-password')
 
 var instance = new Razorpay({
-  key_id: rzp_test_FZsg18Suvu4bT7,
+  key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_SECRET_KEY,
 });
 let page = 1;
