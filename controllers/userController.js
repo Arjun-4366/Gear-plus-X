@@ -5,6 +5,7 @@ const addressModel = require("../models/addressDetails");
 const couponModel = require("../models/couponDetails");
 const orderModel = require("../models/orderDetails");
 
+
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const generateOtp = require("../public/service/generateOtp");
