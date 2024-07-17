@@ -15,7 +15,7 @@ app.use('/public',express.static('public'))
 
 
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 
 
 app.use('/',userRouter)

@@ -255,6 +255,7 @@ const verifyLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const referenceData = await userModel.findOne({ email: email });
+    console.log(referenceData)
 
     if (req.query.page) {
       page = req.query.page;
@@ -280,7 +281,7 @@ const verifyLogin = async (req, res) => {
      const cart =  await cartModel.findOne({ userId })
     const image = req.session.userData.image;
 
-    if (referenceData) {
+    if (referenceData!=null) {
       if (referenceData.isBlocked == false) {
         const passwordCheck = await bcrypt.compare(
           password,
@@ -696,7 +697,7 @@ const addToCart = async (req, res) => {
       cart.items.push({
         product: product._id,
         quantity: 1,
-        price: product.price,
+        price: product.discountedPrice,
         basePrice: product.price,
       });
     }
