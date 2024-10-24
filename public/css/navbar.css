@@ -5,3 +5,31 @@
 .categories:hover {
   background-color: lightgrey;
 }
+/* Initial styles for the navbar (black text, black background) */
+#navbar {
+  background-color: black;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#navbar a, #navbar button {
+  color: black !important;
+}
+
+#navbar .fa-cart-shopping, #navbar .fa-user, #navbar #search-icon {
+  color: black !important;
+}
+
+/* On scroll (transparent background and white text) */
+.scrolled-navbar {
+  background-color: rgba(0, 0, 0, 0.8); /* transparent black */
+  color: white;
+}
+
+.scrolled-navbar a, .scrolled-navbar button {
+  color: white !important;
+}
+
+.scrolled-navbar .fa-cart-shopping, .scrolled-navbar .fa-user, .scrolled-navbar #search-icon {
+  color: white !important;
+}
