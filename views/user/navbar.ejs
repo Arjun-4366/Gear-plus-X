@@ -1,78 +1,166 @@
 
-<nav class="navbar navbar-expand-lg navbar-expand-md fixed-top navbar-dark shadow p-3  bg-white rounded mb-2" style="background-color: #fffdfd ;">
+
+
+
+
+
+
+
+<nav id="navbar" class="navbar navbar-expand-lg navbar-expand-md fixed-top navbar-dark p-3 mb-2" style="background-color: transparent; transition: background-color 0.3s ease;">
     <div class="container-fluid d-flex align-items-center justify-content-around">
-        <a class="navbar-brand" href="<%= userId ? '/userHome' : '/' %>"><img src="/public/assets/new-logo.png" alt="" style="width: 140px;height: 50px;"></a>
-        <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        <a class="navbar-brand" href="<%= userId ? '/userHome' : '/' %>">
+           <h3 class="text-danger"><span class="text-warning">Gear</span ><span class="text-primary">Plus</span>X</h3>
+        </a>
+        <button class="navbar-toggler text-light" id="toggler-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span ><i class="fa-solid fa-bars"></i></span>
+            <span><i class="fa-solid fa-bars"></i></span>
         </button>
-        <div class="collapse navbar-collapse  " id="navbarNav">
-            <form  action="/searchProducts" method="post">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form action="/searchProducts" method="post">
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <label for="searchInput" class="visually-hidden">Search</label>
-                       
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search"
                                 aria-label="Search" name="search">
-                            <button  class="btn btn-outline-light bg-dark text-dark" type="submit">
-                                <i class="fa-solid fa-magnifying-glass text-light" ></i>
-                               
-                            </button>
+                            <span class="input-group-text bg-primary text-white" id="search-addon">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
                         </div>
-                   
                     </div>
                 </div>
+                
             </form>
-            <ul class="navbar-nav ms-5 me-5 col-md-6 d-flex " >
-                <li class="nav-item ms-3 ">
-                    <a class="nav-link text-dark" style="position: relative;" href=<%=userId ? "/myOrders" :"/userLogin"%>>My Orders</a>
-                </li>
-                <div class="dropdown">
-                    <span class="  text-dark nav-link ms-3" type="button" id="userDropdown" data-bs-toggle="dropdown"
-                        aria-expanded="false" >Sort</span>
-                        <ul class="dropdown-menu fade" aria-labelledby="userDropdown" style="background-color: aquamarine;">
-                           
-        
-                                <li><a class="dropdown-item" href="/sortAscend">Price:Low to High</a></li>
-                                <li><a class="dropdown-item" href="/sortDescend">Price:High to Low</a></li>
-                                
-                               
-                        </ul>
-                    </div>
-                <li class="nav-item ms-3 ">
-                    <a class="nav-link text-dark" style="position: relative;" href=<%=userId ? "/wishlist" :"/userLogin"%>>Wishlist</a>
-                </li>
-               
-            </ul>
           
-            <div class="d-flex align-items-center mt-2  ">
-            <a href="<%= userId ? '/cartPage' : '/userLogin' %>" ><i class="fa-solid fa-cart-shopping text-dark fs-4 " style="position: relative;"><span class="text-danger ms-2" style="font-size: 12px;position: absolute;"><%= userId ? cart.items.length :0 %></span></i></a>
-            <div class="dropdown">
-                <span class=" ms-5 " type="button" id="userDropdown" data-bs-toggle="dropdown" 
-                    aria-expanded="false" style="width: 48px;height: 38px;">
-                    <% if (image) { %>
-                        <img src="<%= image %>" alt="" class="rounded-circle profile-image">
-                      <% } else { %>
-                        <i class="fa-solid fa-user text-dark fs-5  mt-2"></i>
-                      <% } %>
-                   
-                </span>
-                <ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: rgb(92, 131, 210);">
-                    <% if (typeof user !=='undefined' ) { %>
+            <ul class="navbar-nav ms-5 me-5 col-md-6 d-flex" id="navLinks" >
+                <li class="nav-item ms-3">
+                    <a class="nav-link" id="orders-link" href=<%= userId ? "/myOrders" :"/userLogin" %>>My Orders</a>
+                </li>
 
-                        <li><a class="dropdown-item" href="/userLogout">Logout</a></li>
-                        <li><a class="dropdown-item" href="/myProfile?id=<%= userId %>">My Profile</a></li>
+                <!-- Categories Dropdown Menu -->
+                <div class="dropdown" id="nav-contents">
+                    <button class="btn btn-bg-none dropdown-toggle" type="button" id="categoriesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </button>
+                    <ul class="dropdown-menu"  aria-labelledby="categoriesDropdown">
+                        <li><a class="dropdown-item" href="/categories?key=football">Football</a></li>
+                        <li><a class="dropdown-item" href="/categories?key=Cricket">Cricket</a></li>
+                        <li><a class="dropdown-item" href="/categories?key=athelete">Athlete</a></li>
+                        <li><a class="dropdown-item" href="/categories?key=Badminton">Badminton</a></li>
+                    </ul>
+                </div>
+
+                <li class="nav-item ms-3">
+                    <a class="nav-link" id="wishlist-link" href=<%= userId ? "/wishlist" :"/userLogin" %>>Wishlist</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center mt-2">
+                <a href="<%= userId ? '/cartPage' : '/userLogin' %>">
+                    <i class="fa-solid fa-cart-shopping fs-4" id="cart-icon">
+                        <span class="text-danger ms-2" style="font-size: 12px; position: absolute;"><%= userId ? cart.items.length : 0 %></span>
+                    </i>
+                </a>
+                <div class="dropdown">
+                    <span class="ms-5" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="width: 48px; height: 38px;">
+                        <% if (image) { %>
+                            <img src="<%= image %>" alt="" class="rounded-circle profile-image">
                         <% } else { %>
-
+                            <i class="fa-solid fa-user fs-5 mt-2" id="user-icon"></i>
+                        <% } %>
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown" style="background-color: rgb(92, 131, 210);">
+                        <% if (typeof user !== 'undefined') { %>
+                            <li><a class="dropdown-item" href="/userLogout">Logout</a></li>
+                            <li><a class="dropdown-item" href="/myProfile?id=<%= userId %>">My Profile</a></li>
+                        <% } else { %>
                             <li><a class="dropdown-item" href="/userLogin">Login</a></li>
-                            <% } %>
-                </ul>
+                        <% } %>
+                    </ul>
+                </div>
             </div>
         </div>
-        </div>
-
     </div>
-    
+
 </nav>
 
+<script>
+  window.addEventListener('scroll', function () {
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('#navLinks .nav-link'); // Select all nav links inside #navLinks
+    const dropdownButton = document.getElementById('categoriesDropdown'); // Dropdown button
+    const cartIcon = document.getElementById('cart-icon'); // Cart icon specifically
+    const userIcon = document.getElementById('user-icon'); // User icon specifically
+
+    if (window.scrollY > 50) {
+        // Apply black background when scrolling down
+        navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+
+        // Change the color of all nav links to white
+        navLinks.forEach(link => {
+            link.style.color = 'white';
+            link.style.setProperty('color', 'white', 'important'); // Add !important to override any CSS
+        });
+
+        // Change dropdown button and items color to white
+        dropdownButton.style.color = 'white';
+        dropdownButton.style.setProperty('color', 'white', 'important'); // Add !important
+
+
+        // Change all icons to white
+        icons.forEach(icon => {
+            icon.style.color = 'white';
+            icon.style.setProperty('color', 'white', 'important'); // Add !important
+        });
+
+        // Change cart and user icons to white
+        if (cartIcon) {
+            cartIcon.style.color = 'white';
+            cartIcon.style.setProperty('color', 'white', 'important');
+        }
+
+        if (userIcon) {
+            userIcon.style.color = 'white';
+            userIcon.style.setProperty('color', 'white', 'important');
+        }
+
+    } else {
+        // Return to transparent when at the top
+        navbar.style.backgroundColor = 'transparent';
+
+        // Revert the color of all nav links to black
+        navLinks.forEach(link => {
+            link.style.color = 'black';
+            link.style.setProperty('color', 'black', 'important'); // Add !important to override
+        });
+
+        // Revert dropdown button and items color to black
+        dropdownButton.style.color = 'black';
+        dropdownButton.style.setProperty('color', 'black', 'important'); // Add !important
+
+        dropdownItems.forEach(item => {
+            item.style.color = 'black';
+            item.style.setProperty('color', 'black', 'important'); // Add !important
+        });
+
+        // Revert all icons to black
+        icons.forEach(icon => {
+            icon.style.color = 'black';
+            icon.style.setProperty('color', 'black', 'important'); // Add !important
+        });
+
+        // Revert cart and user icons to black
+        if (cartIcon) {
+            cartIcon.style.color = 'black';
+            cartIcon.style.setProperty('color', 'black', 'important');
+        }
+
+        if (userIcon) {
+            userIcon.style.color = 'black';
+            userIcon.style.setProperty('color', 'black', 'important');
+        }
+    }
+});
+
+
+</script>

@@ -1,282 +1,247 @@
 <%- include('../header') %>
-  <%- include('./navbar',{userId,image,cart}) %>
-    <style>
-      .progress-bar {
-        border-radius: 16px;
-        background-color: #d51616;
-        /* Default color */
-        transition: width 0.5s ease;
-        /* Adjust the duration and easing as needed */
-      }
+<%- include('./navbar',{userId,image,cart}) %>
 
-      @keyframes placed {
-        from {
-          width: 0%;
-        }
+<style>
+  .progress-bar {
+    border-radius: 16px;
+    background-color: #d51616;
+    transition: width 0.5s ease;
+  }
 
-        to {
-          width: 5%;
-        }
-      }
+  @keyframes placed {
+    from { width: 0%; }
+    to { width: 5%; }
+  }
 
-      @keyframes dispatch {
-        from {
-          width: 0%;
-        }
+  @keyframes dispatch {
+    from { width: 0%; }
+    to { width: 30%; }
+  }
 
-        to {
-          width: 30%;
-        }
-      }
+  @keyframes outForDelivery {
+    from { width: 0%; }
+    to { width: 70%; }
+  }
 
-      @keyframes outForDelivery {
-        from {
-          width: 0%;
-        }
+  @keyframes delivered {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
 
-        to {
-          width: 70%;
-        }
-      }
+  .filling-placed {
+    animation: placed 2s ease;
+  }
 
-      @keyframes delivered {
-        from {
-          width: 0%;
-        }
+  .filling-dispatch {
+    animation: dispatch 2s ease;
+  }
 
-        to {
-          width: 100%;
-        }
-      }
+  .filling-ofd {
+    animation: outForDelivery 2s ease;
+  }
 
+  .filling-delivered {
+    animation: delivered 2s ease;
+  }
 
-      .filling-placed {
-        animation: placed 2s ease;
+  /* Add scrollable feature */
+  .orders-container {
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+    padding-right: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
 
-      }
+  /* Smooth scroll styling */
+  .orders-container::-webkit-scrollbar {
+    width: 10px;
+  }
 
-      .filling-dispatch {
-        animation: dispatch 2s ease;
+  .orders-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  }
 
-      }
+  .orders-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
 
-      .filling-ofd {
-        animation: outForDelivery 2s ease;
+  /* Adjust card sizes */
+  .order-card {
+    margin-bottom: 20px;
+  }
 
-      }
+  /* Reduce height of address section */
+  .address-section {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+</style>
 
-      .filling-delivered {
-        animation: delivered 2s ease;
-      }
-    </style>
-    <section class="h-100 gradient-custom d-flex container-fluid" style="margin-top: 150px;">
-      
-      <% if(order.userOrders.length==0){ %>
-        <div class=" container d-flex align-items-center justify-content-center flex-column  bg-white" >
-          <img src="/public/assets/no-orders.png" alt="" style="width: 40%;height: 40%;">
-
-          <h4 class="mt-2 text-danger">No orders Yet</h4>
-          <a href="/userHome" class="btn btn-success mt-3">Shop Now</a>
-        </div>
-        <%  } else{ %>
-     <section class="col-lg-6 col-xl-6 ">
-              <div class="">
-                <div class="card-header px-4 py-5 rounded-3 " style="background-color:rgb(228, 216, 216) ;">
-                  <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">
-                      <%= order.customerName %>
-                    </span>!</h5>
-                </div>
-    
-    
-                <% order.userOrders.forEach((item)=>{ %>
-                  <div class="card" style="border-radius: 10px;">
-                    <div class="card-body p-4">
-    
-                      <div class="d-flex justify-content-between align-items-center mb-4">
-                        <p class="small text-dark mb-0">OrderId:<%= item._id %>
-                        </p>
-                        <p class="small text-success mb-0">Payment:<%= item.payment %>
-                        </p>
-    
-                      </div>
-    
-                      <div class="card shadow-0 border mb-4">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-2 d-flex justify-content-center align-items-center">
-                              <img src="<%= item.productInfo.image[0] %>" class="img-fluid " alt="Phone" >
-                            </div>
-                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                              <p class="text-primary mb-0">
-                                <%= item.productInfo.name %> 
-                              </p>
-                            </div>
-                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                              <p class="text-danger mb-0 small">
-                                <%= item.productInfo.brand %>
-                              </p>
-                            </div>
-                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                              <p class="text-success mb-0 small">Placed at <br>
-                                <%= item.orderDate %>
-                              </p>
-                            </div>
-                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                              <p class="text-info mb-0 small">Qty: <%= item.quantity %>
-                              </p>
-                            </div>
-                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                              <p class="text-success mb-0 small">₹<%= item.price %>
-                              </p>
-                            </div>
-    
-                          </div>
-                          <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
-                          <div class="row d-flex align-items-center">
-                            <div class="col-md-2">
-                              <p class="text-muted mb-0 small">Order placed</p>
-                            </div>
-                            <div class="col-md-10">
-                              <div class="progress" style="height: 6px; border-radius: 16px;">
-                                <% if(item.status==='Placed' ){%>
-                                  <div class="progress-bar filling-placed" role="progressbar"
-                                    style="width: 5%; border-radius: 16px; background-color: #d51616;" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="0">
-                                  </div>
-                                  <% } else if(item.status==='Dispatched' ){%>
-                                    <div class="progress-bar filling-dispatch" role="progressbar"
-                                      style="width: 30%; border-radius: 16px; background-color: #d57216;" aria-valuenow="0"
-                                      aria-valuemin="0" aria-valuemax="0">
-                                    </div>
-                                    <% } else if(item.status==='Out For Delivery' ){%>
-                                      <div class="progress-bar filling-ofd" role="progressbar"
-                                        style="width: 70%; border-radius: 16px; background-color: #d5cb16;"
-                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="0">
-                                      </div>
-                                      <% } else{ %>
-                                        <div class="progress-bar filling-delivered" role="progressbar"
-                                          style="width: 100%; border-radius: 16px; background-color: #24f30d;"
-                                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="0">
-                                        </div>
-                                        <%}%>
-                              </div>
-                              <div class="d-flex justify-content-around mb-1">
-                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Dispatched</p>
-                                <p class="text-muted mt-1 mb-0 small ms-xl-5">out for Delivery</p>
-                                <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-    
-                      <div class="d-flex flex-column align-items- justify-content-end pt-2">
-                        <p class="text-dark mb-0"><span class="fw-bold me-4">Total Amount: ₹<%= parseInt(item.price )+
-                              parseInt(cart.deliveryFee) %></span></p>
-                        <p>(includind delivery fee ₹40)</p>
-                      </div>
-                      <div class="d-flex justify-content-between pt-2">
-                        <p class="text-muted mb-0 mt-3"><span class="fw-bold me-4">Delivered to</span></p>
-                        <p class="text-muted mb-0 mt-3"><span class="fw-bold me-4">Download Invoice</span></p>
-                      </div>
-                      <div class="d-flex justify-content-between">
-    
-                     <% if(item.shippingAddress && item.shippingAddress.userAddress) { %>
-                        <% const selectedAddress = item.shippingAddress.userAddress.find(address=>address.isSelected === true) %>
-                        <% if(selectedAddress) {%>
-    
-                          <div class=" ms-2 pt-2">
-    
-                            <p>
-                              <%= selectedAddress.address %>
-                            </p>
-                            <p>
-                              <%= selectedAddress.city %>
-                            </p>
-                            <p>
-                              <%= selectedAddress.pin %>
-                            </p>
-                          </div>
-                       <% }%>
-                      <%}%>
-                     
-                    
-                        <a class="btn btn-success mt-3 me-3" style="width: 100px; height: 40px;"
-                          href="/invoice?id=<%= item._id %>">download</a>
-    
-                      </div>
-    
-    
-                    </div>
-    
-                    <% } )%>
-                  </div>
+<section class="h-100 gradient-custom d-flex container-fluid" style="margin-top: 150px;">
+  <% if(order.userOrders.length==0){ %>
+    <div class="container d-flex align-items-center justify-content-center flex-column bg-white">
+      <img src="/public/assets/no-orders.png" alt="" style="width: 40%; height: 40%;">
+      <h4 class="mt-2 text-danger">No orders Yet</h4>
+      <a href="/userHome" class="btn btn-success mt-3">Shop Now</a>
+    </div>
+  <% } else { %>
+    <section class="col-lg-6 col-xl-6">
+      <div class="orders-container">
+        <% order.userOrders.forEach((item) => { %>
+          <div class="card order-card" style="border-radius: 10px;">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="small text-dark mb-0">OrderId: <%= item._id %></p>
+                <p class="small text-success mb-0">Payment: <%= item.payment %></p>
               </div>
-            </section>
-            <section class="col-xl-4 col-lg-4 col-md-6 d-flex flex-column ms-5" >
-            <% if( allAddress.userAddress.length==0) {%>
-              <div class=" ">
-                <div class="d-flex flex-column align-items-center justify-content-center mt-4">
-                  <p><strong>Add your Shipping Address</strong></p>
-                  <a href="/addAddress" class="btn btn-primary">Add Address</a>
+
+              <div class="card shadow-0 border mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                      <img src="<%= item.productInfo.image[0] %>" class="img-fluid" alt="Product">
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-primary mb-0"><%= item.productInfo.name %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-danger mb-0 small"><%= item.productInfo.brand %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-success mb-0 small">Placed at <br><%= item.orderDate %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-info mb-0 small">Qty: <%= item.quantity %></p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-success mb-0 small">₹<%= item.price %></p>
+                    </div>
+                  </div>
+
+                  <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+
+                  <div class="row d-flex align-items-center">
+                    <div class="col-md-2">
+                      <p class="text-muted mb-0 small">Order placed</p>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="progress" style="height: 6px; border-radius: 16px;">
+                        <% if(item.status === 'Placed'){ %>
+                          <div class="progress-bar filling-placed" style="width: 5%; background-color: #d51616;"></div>
+                        <% } else if(item.status === 'Dispatched'){ %>
+                          <div class="progress-bar filling-dispatch" style="width: 30%; background-color: #d57216;"></div>
+                        <% } else if(item.status === 'Out For Delivery'){ %>
+                          <div class="progress-bar filling-ofd" style="width: 70%; background-color: #d5cb16;"></div>
+                        <% } else { %>
+                          <div class="progress-bar filling-delivered" style="width: 100%; background-color: #24f30d;"></div>
+                        <% } %>
+                      </div>
+                      <div class="d-flex justify-content-around mb-1">
+                        <p class="text-muted mt-1 mb-0 small">Dispatched</p>
+                        <p class="text-muted mt-1 mb-0 small">Out for Delivery</p>
+                        <p class="text-muted mt-1 mb-0 small">Delivered</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <% } else {%>
-          
-              <% allAddress.userAddress.forEach((address,i)=>{ %>
-             <div class="" style="position: sticky;">
 
-            
-                <div class="card mt-3 border-info ">
-    
-                  <p class="text-danger ms-4 mt-1">Address <%= i + 1 %>
-                  </p>
-                  <div class="card-body col-12">
-                    <form action="/chooseAddress?index=<%= i %>" method="post">
-                      <div class="d-flex  d-flex align-items-center  justify-content-between">
-    
-                        <label for="addressCheckbox<%= i + 1 %>">
-                          <strong>
-                            <%= address.firstName %>, <%= address.city %>, <%= address.address %>,<br>pin: <%= address.pin
-                                    %>, Mob: <%= address.mobile %>
-                          </strong>
-                        </label>
-                        <input type="radio" id="addressCheckbox<%= i + 1 %>" name="address" value="<%= address._id %>"
-                          style="width: 20px;height: 20px;" class="addressCheckBox" <%=address.isSelected ? 'checked' : ''
-                          %>>
-                      </div>
-    
-                      <script>
-                        var checkboxes = document.querySelectorAll('.addressCheckBox')
-                        checkboxes.forEach((checkboxOne) => {
-                          checkboxOne.addEventListener('change', function () {
-                            checkboxes.forEach((checkboxTwo) => {
-                              if (checkboxTwo !== checkboxOne) {
-                                checkboxTwo.checked = false
-                              }
-                            })
-                          })
-                        }) 
-                      </script>
-    
-                  </div>
-    
-                </div>
-                <% }) %>
-                  <div class="d-flex ">
-                    <div class="mb-4  mt-3 d-flex">
-                      <button type="submit" class="btn btn-success me-4"></i>Submit</button>
-                      <a href="/addAddress" class="btn btn-primary">Add new</a>
+              <div class="d-flex flex-column align-items-start justify-content-end pt-2">
+                <p class="text-dark mb-0"><span class="fw-bold">Total Amount: ₹<%= parseInt(item.price) + parseInt(cart.deliveryFee) %></span></p>
+                <p>(Including delivery fee ₹40)</p>
+              </div>
+              <div class="d-flex justify-content-between pt-2">
+                <p class="text-muted mb-0 mt-3"><span class="fw-bold">Delivered to</span></p>
+                <p class="text-muted mb-0 mt-3"><span class="fw-bold">Download Invoice</span></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <% if(item.shippingAddress && item.shippingAddress.userAddress) { %>
+                  <% const selectedAddress = item.shippingAddress.userAddress.find(address => address.isSelected === true); %>
+                  <% if(selectedAddress) { %>
+                    <div class="ms-2 pt-2">
+                      <p><%= selectedAddress.address %></p>
+                      <p><%= selectedAddress.city %></p>
+                      <p><%= selectedAddress.pin %></p>
                     </div>
-                    </form>
-                  </div>
-                
-            <%  }%>
-    
+                  <% } %>
+                <% } %>
+                <a class="btn btn-success" href="/invoice?id=<%= item._id %>">Download</a>
+              </div>
+            </div>
           </div>
-          <%  }%>
-
-
-        </section>
+        <% }); %>
+      </div>
     </section>
-    <%- include('../footer') %>
+
+    <!-- Address Section -->
+    <section class="col-xl-4 col-lg-4 col-md-6 d-flex flex-column ms-5" >
+      <% if( allAddress.userAddress.length==0) {%>
+        <div class=" ">
+          <div class="d-flex flex-column align-items-center justify-content-center mt-4">
+            <p><strong>Add your Shipping Address</strong></p>
+            <a href="/addAddress" class="btn btn-primary">Add Address</a>
+          </div>
+        </div>
+        <% } else {%>
+    
+        <% allAddress.userAddress.forEach((address,i)=>{ %>
+       <div class="" style="position: sticky;">
+
+      
+          <div class="card mt-3 border-info ">
+
+            <p class="text-danger ms-4 mt-1">Address <%= i + 1 %>
+            </p>
+            <div class="card-body col-12">
+              <form action="/chooseAddress?index=<%= i %>" method="post">
+                <div class="d-flex  d-flex align-items-center  justify-content-between">
+
+                  <label for="addressCheckbox<%= i + 1 %>">
+                    <strong>
+                      <%= address.firstName %>, <%= address.city %>, <%= address.address %>,<br>pin: <%= address.pin
+                              %>, Mob: <%= address.mobile %>
+                    </strong>
+                  </label>
+                  <input type="radio" id="addressCheckbox<%= i + 1 %>" name="address" value="<%= address._id %>"
+                    style="width: 20px;height: 20px;" class="addressCheckBox" <%=address.isSelected ? 'checked' : ''
+                    %>>
+                </div>
+
+                <script>
+                  var checkboxes = document.querySelectorAll('.addressCheckBox')
+                  checkboxes.forEach((checkboxOne) => {
+                    checkboxOne.addEventListener('change', function () {
+                      checkboxes.forEach((checkboxTwo) => {
+                        if (checkboxTwo !== checkboxOne) {
+                          checkboxTwo.checked = false
+                        }
+                      })
+                    })
+                  }) 
+                </script>
+
+            </div>
+
+          </div>
+          <% }) %>
+            <div class="d-flex ">
+              <div class="mb-4  mt-3 d-flex">
+                <button type="submit" class="btn btn-success me-4"></i>Submit</button>
+                <a href="/addAddress" class="btn btn-primary">Add new</a>
+              </div>
+              </form>
+            </div>
+          
+      <%  }%>
+
+    </div>
+    <%  }%>
+
+
+  </section>
+</section>
+<%- include('../footer') %>

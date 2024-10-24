@@ -74,7 +74,7 @@
 
             </section>
                <!-- Pagination -->
-            <div class="d-flex  justify-content-center align-items-center mt-5">
+            <div class="d-flex  justify-content-center align-items-center mt-3 mb-2">
                 <% for(let i=1; i<=totalPages; i++){%>
                     <a href="?page=<%= i %>"
                         class="text-decoration-none ms-4 bg-primary text-white d-flex align-items-center justify-content-center"
@@ -84,31 +84,6 @@
 
                     <% } %>
             </div>
-            <h4 class="text-dark mt-5 d-flex align-items-center justify-content-center">Choose your Categories</h4>
-            <div class="align-items-center justify-content-center row container-fluid mt-5 mb-5" id="categories">
-
-                <!-- categories -->
-                <a href="/categories?key=football" class="card col-lg-3 align-items-center justify-content-center"
-                    style="border: none;"> <img src="/public/assets/football-categories.png"
-                        class="object-fit-cover border rounded" alt="...">
-                </a>
-
-                <a href="/categories?key=Cricket" class="card col-lg-3 align-items-center justify-content-center"
-                    style="border: none;"> <img src="/public/assets/cricket-categories.png"
-                        class="object-fit-cover border rounded" alt="...">
-
-                </a>
-
-                <a href="/categories?key=athelete" class="card col-lg-3 align-items-center justify-content-center"
-                    style="border: none;"> <img src="/public/assets/athelete-categories.png"
-                        class="object-fit-cover border rounded" alt="...">
-                </a>
-
-                <a href="/categories?key=Badminton" class="card col-lg-3 align-items-center justify-content-center"
-                    style="border: none;"><img src="/public/assets/badminton-categories.png"
-                        class="object-fit-cover border rounded" alt="...">
-                </a>
-
-            </div>
+            
 
             <%- include('../footer') %>

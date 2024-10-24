@@ -5,7 +5,7 @@
 .categories:hover {
   background-color: lightgrey;
 }
-/* Initial styles for the navbar (black text, black background) */
+
 #navbar {
   background-color: black;
   color: black;
@@ -20,9 +20,9 @@
   color: black !important;
 }
 
-/* On scroll (transparent background and white text) */
+
 .scrolled-navbar {
-  background-color: rgba(0, 0, 0, 0.8); /* transparent black */
+  background-color: rgba(0, 0, 0, 0.8); 
   color: white;
 }
 
