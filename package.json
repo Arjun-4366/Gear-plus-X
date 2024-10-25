@@ -18,6 +18,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0",
     "puppeteer": "^21.7.0",
-    "razorpay": "^2.9.2"
+    "razorpay": "^2.9.2",
+    "package": "https://github.com/vercel/node.git"
   }
 }
